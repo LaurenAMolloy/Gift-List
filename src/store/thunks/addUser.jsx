@@ -2,8 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const addUser = createAsyncThunk('users/add', async() => {
-    //Grab user from dummy JSON
-    const response = await axios.get('https://dummyjson.com/users/1')
+    const random = Math.floor(Math.random() * 100) + 1
+    console.log(random)
+    //Grab random  user from dummy JSON
+    const response = await axios.get(`https://dummyjson.com/users/${random}`)
     const name = (response.data.firstName);
     console.log(name)
 

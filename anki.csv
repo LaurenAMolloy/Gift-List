@@ -1,0 +1,13 @@
+Why do we use a Skeleton Loader instead of showing a blank screen or a spinner?	To signal that data is being fetched and give users feedback that something is happening. It also provides a visual placeholder structure, reducing perceived wait time.
+What does the `times` prop in the Skeleton component control?	It controls how many skeleton boxes (rows/placeholders) are rendered.
+How does the `className` prop affect the Skeleton component?	It allows you to pass additional CSS/Tailwind classes to customize height, width, spacing, and other styles for the skeleton boxes.
+How does the shimmer effect work in the Skeleton component?	The `innerClassNames` div moves across the `outerClassNames` container using `-translate-x-full` and `animate-shimmer`. A gradient (`bg-gradient-to-r`, `from-gray-200`, `via-white`, `to-gray-200`) creates a moving light illusion.
+How do you integrate the Skeleton Loader into a component like `UsersList`?	Render the Skeleton when the loading state is `true`, usually during the initial fetch:
+
+\`\`\`jsx
+if(isLoading) {
+  return <Skeleton times={6} className="h-10 w-full" />;
+}
+\`\`\`
+Why shouldn’t the Skeleton Loader show for actions like adding a new user?	Skeletons represent **incoming data structure**, not actions on existing data. For operations like adding a user, it’s better to show a **button spinner** or inline loading state to avoid hiding the existing list.
+What mistake could happen if you use a single Redux `isLoading` for everything?	The skeleton could appear for all operations (adding/deleting users), causing unnecessary UI flashes and poor user experience.
