@@ -7,12 +7,11 @@ import { FaCircleChevronDown } from "react-icons/fa6";
 export default function ExpandablePanel({ header, children }) {
     //State to update panel
     const [expanded, setExpanded] = useState(false);
-
     //event handler to display panel
     const handleClick = () => {
         setExpanded(!expanded)
     }
-
+    
   return (
     <div className='mb-2 border rounded'>
         <div className='flex p-2 justify-between items-center'>

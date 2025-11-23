@@ -9,16 +9,24 @@
       "name": "Florence"
     },
     {
-      "id": "8023",
-      "name": "Michael"
-    },
-    {
       "id": "0fdc",
       "name": "Ava"
     },
     {
-      "id": "0389",
-      "name": "Daniel"
+      "id": "8852",
+      "name": "Lila"
+    },
+    {
+      "id": "b840",
+      "name": "Emily"
+    }
+  ],
+  "gifts": [
+    {
+      "id": 10,
+      "title": "Barbie",
+      "userId": "1",
+      "price": 25
     }
   ]
 }

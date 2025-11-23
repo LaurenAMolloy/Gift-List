@@ -1,26 +1,23 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import { useFetchGiftsQuery } from '../store'
+import Button from './Button'
 
-export default function GiftList() {
-     //Get the list of gifts from the store
-     const gifts = useSelector((state) => {
-        return state.gifts.data
-     });
-
-     console.log(gifts)
-      //Handlers for the delete button
-
-     //Render the list with a delete button
-    const renderedGifts = gifts.map((gift) => {
-        return (
-            <div key={gift.id}>
-                <p>{gift.name} - {gift.cost}</p>
-            </div>
-        )
-    });
+export default function GiftList({ user }) {
+    const { data, error, isLoading } = useFetchGiftsQuery(user);
+    console.log(user)
+    console.log(data, error, isLoading);
+    //When user clicks show form to update gifts
+    //When form is submitted hide form
+    //Update giftlist using RTK Query
+    //Add a mechanism where user can add a random gift
+    //Fetch from dummy json
+    //Use the mutation
   return (
-    <div className="gift list">
-        {renderedGifts}
+    <>
+    <div className="flex flex-row align-middle gap-5 py-4">
+    <p>Gifts for {user.name}</p>
+        <Button primary rounded>Add a Gift</Button>
+        <Button primary rounded>Surprise Me!</Button>
     </div>
+    </>
   )
 }
