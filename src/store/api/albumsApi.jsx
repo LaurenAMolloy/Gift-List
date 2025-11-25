@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const giftsApi = createApi({
+const albumsApi = createApi({
     //Key in redux store
-    reducerPath: 'gifts',
+    reducerPath: 'albums',
     //BaseQuery is a wrapper around fetch that will handle JSON
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3005'
@@ -13,7 +13,7 @@ const giftsApi = createApi({
             //This defines the name of the hook
             fetchGifts: builder.query({
                 query: (user) =>({
-                    url: '/gifts',
+                    url: '/albums',
                     params: {
                         userId: user.id
                     },
@@ -29,6 +29,6 @@ const giftsApi = createApi({
 //Export hooks
 //This is the hook inside the albumsApi object
 //albumsApi.useFetchAlbumsQuery
-export const { useFetchGiftsQuery } = giftsApi
+export const { useFetchAlbumsQuery } = albumsApi
 //This allows us to add the api to the store
-export { giftsApi } 
+export { albumsApi } 

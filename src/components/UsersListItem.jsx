@@ -4,8 +4,7 @@ import { GoTrash } from "react-icons/go";
 import ExpandablePanel from './ExpandablePanel';
 import { useDispatch } from 'react-redux';
 import { deleteUser } from '../store/thunks/deleteUser'
-import GiftList from './GiftList';
-import GiftForm from './GiftForm';
+import AlbumsList from './AlbumsList';
 
 export default function UsersListItem({ user }) {
   const dispatch = useDispatch();
@@ -23,8 +22,7 @@ export default function UsersListItem({ user }) {
 
   return (
     <ExpandablePanel header={header}>
-      <GiftList user={ user } />
-      <GiftForm />
+      <AlbumsList user={ user } />
     </ExpandablePanel>
   )
 }
