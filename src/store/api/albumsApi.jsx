@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { faker } from '@faker-js/faker'
 
 const albumsApi = createApi({
     //Key in redux store
@@ -10,8 +11,27 @@ const albumsApi = createApi({
     //Endpoints define a set of API Operations
     endpoints(builder) {
         return {
+            //Adding a user
+            addAlbum: builder.mutation({
+                invalidatesTags: (result, error, user) => {
+                    return [{type: AlbumsList, id: user.id}]
+                },
+                query: (user) => {
+                    return {
+                    url: '/albums',
+                    method: 'POST',
+                    body: {
+                        userId: user.Id,
+                        title: faker.commerce.prod
+                    }
+                    } 
+                }
+            }),
             //This defines the name of the hook
-            fetchGifts: builder.query({
+            fetchAlbums: builder.query({
+                invalidatesTags: (result, error, user) => {
+                    return [{type: AlbumsList, id: user.id}]
+                },
                 query: (user) =>({
                     url: '/albums',
                     params: {
@@ -20,8 +40,6 @@ const albumsApi = createApi({
                     method: 'GET'
                 })
             })
-            //Add post request to add a gift here
-         
         }
     }
 });
@@ -29,6 +47,6 @@ const albumsApi = createApi({
 //Export hooks
 //This is the hook inside the albumsApi object
 //albumsApi.useFetchAlbumsQuery
-export const { useFetchAlbumsQuery } = albumsApi
+export const { useFetchAlbumsQuery, useAddAlbumMutation } = albumsApi
 //This allows us to add the api to the store
 export { albumsApi } 

@@ -11,3 +11,15 @@ if(isLoading) {
 \`\`\`
 Why shouldn’t the Skeleton Loader show for actions like adding a new user?	Skeletons represent **incoming data structure**, not actions on existing data. For operations like adding a user, it’s better to show a **button spinner** or inline loading state to avoid hiding the existing list.
 What mistake could happen if you use a single Redux `isLoading` for everything?	The skeleton could appear for all operations (adding/deleting users), causing unnecessary UI flashes and poor user experience.
+Question	Answer
+What is fine-grained loading in React?	Loading state that affects a specific part of the UI (like a button or a component) independently of the global store or other parts of the UI.
+Why use local state (like isCreatingUser) for fine-grained loading instead of Redux state?	Local state is simpler and avoids unnecessary global store updates; it allows a part of the UI to respond immediately without affecting other components.
+What is useThunk designed to do?	Wrap an async thunk to provide a runThunk function for dispatching with arguments, local isLoading state, and local error state.
+In useThunk, why is runThunk wrapped in useCallback?	To memoize the function so its identity is stable across renders, preventing unnecessary re-renders or dependency issues in useEffect.
+What does unwrap() do when called on a dispatched thunk?	Converts the thunk’s action into a standard promise that resolves with the payload or rejects with an error, making error handling easier.
+In a component, what is doAddUser when using useThunk(addUser)?	doAddUser is just the name you give to the first element returned by useThunk (the wrapped thunk function, runThunk).
+How do you implement loading on a button using fine-grained loading?	1. Pass a loading prop to the Button.
+2. Disable the button when loading.
+3. Optionally show a spinner (<GoSync />) and reduce opacity.
+Why might you not see a “Creating…” state on a button even if isCreatingUser is true?	Because the async thunk may resolve too quickly, so React batches the state updates and the UI never visibly shows the loading state. You can fix this by adding a small delay or enforcing a minimum spinner time.
+What is the difference between Redux loading state and fine-grained loading state?	Redux loading state is global and shared across the app, while fine-grained loading is local to a component or a specific UI element, giving more granular control.
